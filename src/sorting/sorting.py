@@ -36,11 +36,34 @@ def merge_sort(arr: List[int]) -> List[int]:
 # utilize any extra memory
 # In other words, your implementation should not allocate any additional lists
 # or data structures; it can only re-use the memory it was given as input
-def merge_in_place(arr, start, mid, end):
-    # Your code here
-    pass
+def merge_in_place(arr: List[int], start: int, middle: int, end: int) -> None:
+    new_start = middle + 1
+
+    if arr[middle] <= arr[new_start]:
+        return
+
+    while start <= middle and new_start <= end:
+        if arr[start] <= arr[new_start]:
+            start += 1
+        else:
+            value = arr[new_start]
+            index = new_start
+
+            while index != start:
+                arr[index] = arr[index - 1]
+                index -= 1
+
+            arr[start] = value
+
+            start += 1
+            middle += 1
+            new_start += 1
 
 
-def merge_sort_in_place(arr, l, r):
-    # Your code here
-    pass
+def merge_sort_in_place(arr: List[int], left: int, right: int) -> None:
+    if left < right:
+        middle = left + (right - left) // 2
+        merge_sort_in_place(arr, left, middle)
+        merge_sort_in_place(arr, middle + 1, right)
+
+        merge_in_place(arr, left, middle, right)
