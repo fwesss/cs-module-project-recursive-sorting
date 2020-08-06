@@ -1,4 +1,7 @@
-def binary_search(arr, target, start, end):
+from typing import List
+
+
+def binary_search(arr: List[int], target: int, start: int, end: int) -> int:
     if len(arr) > 0:
         if arr[start] == target:
             return start
