@@ -28,6 +28,30 @@ def binary_search(arr: List[int], target: int, start: int, end: int) -> int:
 # sorted in ascending order or in descending order
 # You can implement this function either recursively
 # or iteratively
-def agnostic_binary_search(arr, target):
-    # Your code here
-    pass
+def agnostic_binary_search(arr: List[int], target: int) -> int:
+    start = 0
+    end = len(arr) - 1
+
+    while start <= end:
+        if start is target:
+            return start
+
+        if end is target:
+            return end
+
+        middle = start + (end - start) // 2
+        if arr[middle] is target:
+            return middle
+
+        if arr[start] < arr[end]:
+            if arr[middle] > target:
+                end = middle - 1
+            else:
+                start = middle + 1
+        else:
+            if arr[middle] < target:
+                end = middle - 1
+            else:
+                start = middle + 1
+
+    return -1
